@@ -1,5 +1,6 @@
 package com.ohgiraffers.handlermethod;
 
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -96,6 +97,51 @@ public class FirstController {
         System.out.println("menu = " + menu);
         
         return "first/searchResult";
+    }
+
+    @GetMapping("login")
+    public void login() {}
+
+    /* 4-1. session 이용하기
+    *   HttpSession 을 매개변수로 선언하면 핸들러 메소드 호출 시 세션 객체를 넣어서 호출한다.
+    *  */
+    @PostMapping("login1")
+    public String sessionTest1(HttpSession session, @RequestParam String id) {
+
+        session.setAttribute("id", id);
+
+        return "first/loginResult";
+    }
+
+    @GetMapping("logout")
+    public String logoutTest1(HttpSession session) {
+
+        session.invalidate();
+
+        return "first/loginResult";
+    }
+
+    /* 필기.
+    *   4-2. @SessionAttributes 를 이용하여 session 에 값 담기
+    *   클래스 레벨에 @SessionAttributes 어노테이션을 이용하여
+    *   세션에 값을 담을 key 값을 설정해두면
+    *   Model 영역에 해당 key 로 값이 추가되는 경우 session 에 자동 등록을 해준다.
+    *  */
+
+    @PostMapping("longin2")
+    public String sessionTest2(Model model, @RequestParam String id) {
+
+        model.addAttribute("id", id);
+
+        return "first/loginResult";
+    }
+
+    @GetMapping("logout2")
+    public String logoutTest2() {
+
+
+
+        return "frist/loginResult";
     }
 
 }
