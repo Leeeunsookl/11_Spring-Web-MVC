@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.UUID;
 
 @Controller
 public class FileuploadController {
@@ -47,8 +48,19 @@ public class FileuploadController {
         String originFileName = singleFile.getOriginalFilename();
         System.out.println("originFileName = " + originFileName);
 
+        /* 확장자 제거 */
+        String ext = originFileName.substring(originFileName.lastIndexOf("."));
+        System.out.println("ext = " + ext);
 
-        return "/";
+        String savedName = UUID.randomUUID().toString().replace("-", "") + ext;
+        System.out.println("savedName = " + savedName);
+
+        /* 파일을 저장 */
+
+            singleFile.transferTo(new File(filePath + "/" + savedName));
+            model.addAttribute("message", "파일 업로드 성공!!!!");
+            model.addAttribute("img", "static/img/single/" + savedName);
+        return "result";
     }
 
 }
