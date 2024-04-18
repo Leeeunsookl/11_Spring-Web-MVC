@@ -10,5 +10,10 @@
         <img th:src="${img}" width="300" height="300">
     </div>
 
+    <div th:else>
+        <div th:each="img : ${imgs}">
+            <img th:src="${img}" width="300" height="300">
+        </div>
+    </div>
 </body>
 </html>

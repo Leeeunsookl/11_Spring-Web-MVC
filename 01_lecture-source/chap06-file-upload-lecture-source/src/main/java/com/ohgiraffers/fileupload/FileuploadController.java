@@ -11,6 +11,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -63,4 +65,48 @@ public class FileuploadController {
         return "result";
     }
 
+    @PostMapping("multi-file")
+    public String multiFileUpload(@RequestParam List<MultipartFile> multiFiles
+                                  , @RequestParam String multiFileDescription
+                                  , Model model) throws IOException {
+
+        System.out.println("multipartFiles = " + multiFiles);
+        System.out.println("multiFileDescription = " + multiFileDescription);
+
+        Resource resource = resourceLoader.getResource("classpath:static/img/multi");
+        String filePath = null;
+        
+        if(!resource.exists()) {
+            
+            String root = "src/main/resources/static/img/multi";
+            File file = new File(root);
+            file.mkdirs();
+            
+            filePath = file.getAbsolutePath();
+        } else {
+            filePath = resourceLoader.getResource("classpath:static/img/multi").getFile().getAbsolutePath();
+        }
+
+        System.out.println("filePath = " + filePath);
+
+        List<FileDTO> files = new ArrayList<>();
+        List<String> saveFiles = new ArrayList<>();
+
+        for(MultipartFile file : multiFiles) {
+            /* 파일명 변경 처리 */
+            String originFileName = file.getOriginalFilename();
+            String ext = originFileName.substring(originFileName.lastIndexOf("."));
+            String savedName = UUID.randomUUID().toString().replace("-", "") + ext;
+
+            files.add(new FileDTO(originFileName, savedName, filePath, multiFileDescription));
+
+            file.transferTo(new File(filePath + "/" + savedName));
+            saveFiles.add("static/img/multi/" + savedName);
+        }
+
+        model.addAttribute("message", "파일 업로드 성공!!!!!!!!");
+        model.addAttribute("imgs" , saveFiles);
+
+        return "result";
+    }
 }
