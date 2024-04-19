@@ -1,5 +1,6 @@
 package com.ohgiraffers.crud.menu.controller;
 
+import com.ohgiraffers.crud.menu.model.dto.CategoryDTO;
 import com.ohgiraffers.crud.menu.model.dto.MenuDTO;
 import com.ohgiraffers.crud.menu.model.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -32,4 +34,12 @@ public class MenuController {
 
     }
 
+    @GetMapping("regist")
+    public void registPage() {}
+
+    @GetMapping(value = "category", produces = "application/json; charset=UTF-8")
+    @ResponseBody
+    public List<CategoryDTO> findCategoryList() {
+        return menuService.findAllCategory();
+    }
 }
