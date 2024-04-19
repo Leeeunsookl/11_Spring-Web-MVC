@@ -3,6 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script>
+        const successMessage = `[[${successMessage}]]`;
+        if(successMessage) {
+            alert(successMessage);
+        }
+    </script>
 </head>
 <body>
     <div th:replace="common/header.html"></div>

@@ -37,4 +37,22 @@
             ref_category_code
         from tbl_category
     </select>
+
+    <insert id="registNewMenu" parameterType="com.ohgiraffers.crud.menu.model.dto.MenuDTO"
+    useGeneratedKeys="true" keyProperty="code">
+        insert into tbl_menu
+        (
+            menu_name
+        ,   menu_price
+        ,   category_code
+        ,   orderable_status
+        )
+        values
+        (
+            #{ name }
+        ,   #{ price }
+        ,   #{ categoryCode }
+        ,   #{ orderableStatus }
+        )
+    </insert>
 </mapper>
