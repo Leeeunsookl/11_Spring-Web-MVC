@@ -8,6 +8,6 @@ import java.util.List;
 @Mapper
 public interface MenuMapper {
 
-    List<MenuDTO> findAllMenu();
+    List<MenuDTO> findAllMenus();
 
 }

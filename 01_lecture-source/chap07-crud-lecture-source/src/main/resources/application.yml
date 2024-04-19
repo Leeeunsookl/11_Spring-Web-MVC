@@ -9,3 +9,7 @@ spring:
     url: jdbc:mysql://localhost:3306/menudb
     username: ohgiraffers
     password: ohgiraffers
+
+# mybatis ????
+mybatis:
+  mapper-locations: mappers/**/*.xml

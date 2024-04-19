@@ -19,6 +19,6 @@ public class MenuService {
 
     public List<MenuDTO> findAllMenus() {
 
-        return menuMapper.findAllMenu();
+        return menuMapper.findAllMenus();
     }
 }

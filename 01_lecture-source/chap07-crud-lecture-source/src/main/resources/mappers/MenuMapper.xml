@@ -12,7 +12,7 @@
         <result property="orderableStatus" column="orderable_status"/>
     </resultMap>
 
-    <select id="findAllMenu" resultMap="menuResultMap">
+    <select id="findAllMenus" resultMap="menuResultMap">
         select
             menu_code,
             menu_name,
