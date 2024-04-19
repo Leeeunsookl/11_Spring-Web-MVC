@@ -60,7 +60,7 @@ public class MenuController {
         menuService.registNewMenu(newMenu);
         /* locale : 지역(나라) 에 대한 정보 다국어 처리와 관련 된 정보 */
         logger.info("Locale : {}", locale);
-        rttr.addFlashAttribute("successMessage", messageSource.getMessage("registMenu", new Object[]{newMenu.getName()}, locale));
+        rttr.addFlashAttribute("successMessage", messageSource.getMessage("registMenu", new Object[]{newMenu.getName(), newMenu.getPrice()}, locale));
 
         return "redirect:/menu/list";
     }
