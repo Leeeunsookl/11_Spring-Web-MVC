@@ -17,4 +17,7 @@ public interface MenuMapper {
     void registNewMenu(MenuDTO newMenu);
 
     List<MenuAndCategoryDTO> findAllMenuAndCategoryList();
+
+
+    void deleteMenuByCode(int code);
 }

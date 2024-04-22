@@ -84,4 +84,9 @@
         where
             a.orderable_status = 'Y'
     </select>
+
+    <delete id="deleteMenuByCode" parameterType="int">
+        delete from tbl_menu
+        where menu_code = #{ code }
+    </delete>
 </mapper>
