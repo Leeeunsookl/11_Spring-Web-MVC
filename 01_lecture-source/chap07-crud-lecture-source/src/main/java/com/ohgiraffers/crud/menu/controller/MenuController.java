@@ -1,6 +1,7 @@
 package com.ohgiraffers.crud.menu.controller;
 
 import com.ohgiraffers.crud.menu.model.dto.CategoryDTO;
+import com.ohgiraffers.crud.menu.model.dto.MenuAndCategoryDTO;
 import com.ohgiraffers.crud.menu.model.dto.MenuDTO;
 import com.ohgiraffers.crud.menu.model.service.MenuService;
 import org.apache.logging.log4j.LogManager;
@@ -64,4 +65,15 @@ public class MenuController {
 
         return "redirect:/menu/list";
     }
+
+    @GetMapping("joinCategory/list")
+    public String menuAndCategoryList(Model model) {
+
+        List<MenuAndCategoryDTO> menuAndCategoryList = menuService.findAllMenuAndCategory();
+
+        model.addAttribute("menuAndCategoryList", menuAndCategoryList);
+
+        return "menu/joinMenu";
+    }
+
 }
