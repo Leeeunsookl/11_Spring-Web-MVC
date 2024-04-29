@@ -2,9 +2,11 @@ package com.ohgiraffers.jacksonfetch;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -54,5 +56,19 @@ public class JacksonController {
         ObjectMapper mapper = new ObjectMapper();
 
         return mapper.writeValueAsString(memberList);
+    }
+
+    /* jsonView 를 이용한 응답 */
+    @GetMapping("jackson2")
+    public ModelAndView getMemberModelAndView(ModelAndView mv, HttpServletResponse response) throws JsonProcessingException {
+
+        response.setContentType("application/json; charset=UTF-8");
+
+        ObjectMapper mapper = new ObjectMapper();
+
+        mv.addObject("memberList", mapper.writeValueAsString(memberList));
+        mv.setViewName("jsonView");
+
+        return mv;
     }
 }
